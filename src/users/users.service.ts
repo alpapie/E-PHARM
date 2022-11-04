@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import * as bcrypt from "bcrypt"
 
 @Injectable()
 export class UsersService {
@@ -40,8 +41,13 @@ export class UsersService {
     return user;
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+ async update(id: string, user) {
+    try{
+      await this.UserModel.updateOne({_id:id},user)
+    }catch{
+      throw new NotFoundException("erreur lors de la modification")
+    }
+    return true;
   }
 
  async  remove(id: string) {
@@ -54,4 +60,18 @@ export class UsersService {
     if(userToDelete.deletedCount==0) return "aucunn user trouver"
     return `user avec id ${id} suprimer avec success`;
   }
+
+async login(user){
+
+    const userGet=await this.UserModel.findOne({email:user.email});
+    if(!userGet){
+        return null
+    }
+    // console.log(user)
+    const isMatch= await bcrypt.compare(user.password, userGet.password);
+    if(!isMatch){
+       return null
+    } 
+    return {userGet}
+}
 }

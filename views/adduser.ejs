@@ -1,0 +1,67 @@
+<%- include('./layouts/header'); -%>
+
+<div class="container-fluid">
+    <div class="layout-specing">
+        <div class="d-md-flex justify-content-between">
+            <h5 class="mb-0">Add Users</h5>
+
+            <!-- <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
+                    <li class="breadcrumb-item"><a href="doctors.html">Doctors</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Doctor</li>
+                </ul>
+            </nav> -->
+        </div>
+        
+
+        <div class="card border-0 p-4 rounded shadow">
+           <form action="/users" method="post" class="mt-4" enctype="multipart/form-data">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 col-md-8 text-center text-md-start mt-4 mt-sm-0">
+                        <h5 class="">Upload your picture</h5>
+                    </div><!--end col-->
+
+                    <div class="col-lg-5 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
+                        <input type="file" name="file" id="">
+                    </div><!--end col-->
+                </div><!--end row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Prenom</label>
+                            <input name="prenom" id="name" type="text" class="form-control" placeholder="First Name :">
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">nom </label>
+                            <input name="nom" id="name2" type="text" class="form-control" placeholder="Last Name :">
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input name="email" id="email" type="email" class="form-control" placeholder="email :">
+                        </div> 
+                    </div><!--end col-->
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Telephone</label>
+                            <input name="numero" id="number" type="text" class="form-control" placeholder="Phone no. :">
+                        </div>                                                                               
+                    </div><!--end col-->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input name="password" id="number" type="password" class="form-control" placeholder="">
+                        </div>                                                                               
+                    </div><!--end col-->
+                <button type="submit" class="btn btn-primary">Add User</button>
+            </form>
+        </div>
+    </div><!--end col-->
+</div><%- include('./layouts/footer'); -%>

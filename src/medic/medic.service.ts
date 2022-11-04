@@ -1,26 +1,59 @@
-import { Injectable } from '@nestjs/common';
-import { CreateMedicDto } from './dto/create-medic.dto';
-import { UpdateMedicDto } from './dto/update-medic.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+import { Medic } from './entities/medic.entity';
 
 @Injectable()
 export class MedicService {
-  create(createMedicDto: CreateMedicDto) {
-    return 'This action adds a new medic';
+  constructor(@InjectModel('medic') private MedicSchema: Model<Medic>){}
+  
+ async create(user) {
+    let usernew;
+    try{
+      usernew= await new this.MedicSchema(user)
+      await usernew.save()
+    }catch(error){
+      throw new NotFoundException("erreur lors de l'enregistrement")
+    }
+    return true;
   }
 
-  findAll() {
-    return `This action returns all medic`;
+  async findAll() {
+    let users
+    try {
+      users= await this.MedicSchema.find()
+    } catch (error) {
+      throw new NotFoundException("erreur lors de la recuperation")
+    }
+    return users;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} medic`;
+ async  findOne(id: string) {
+    let user;
+    try {
+      user= await this.MedicSchema.findById(id)
+    } catch (error) {
+      throw new NotFoundException('eror')
+    }
+    return user
   }
 
-  update(id: number, updateMedicDto: UpdateMedicDto) {
-    return `This action updates a #${id} medic`;
+ async update(id: string, user) {
+    try {
+      await this.MedicSchema.updateOne({_id:id},user)
+    } catch (error) {
+      throw new NotFoundException('eror')
+    }
+    return true;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} medic`;
+  async remove(id: string) {
+    try {
+      await this.MedicSchema.deleteOne({_id:id})
+    } catch (error) {
+      throw new NotFoundException('eror')
+    }
+    return true;
   }
 }

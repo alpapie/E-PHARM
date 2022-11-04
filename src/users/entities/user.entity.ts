@@ -1,4 +1,3 @@
-import { kStringMaxLength } from 'buffer';
 import * as mongoose from 'mongoose'
 
 export const UserSchema= new mongoose.Schema({
@@ -6,6 +5,7 @@ export const UserSchema= new mongoose.Schema({
     nom:{type:String,require:true},
     email:{type:String, require:true,unique:true},
     password:{type:String,require:true},
+    numero:{type:String},
     avatar:{type:String}
 })
 export interface User {
@@ -13,5 +13,6 @@ export interface User {
     nom:string;
     email:string;
     password:string,
+    numero:string;
     avatar:string;
 }

@@ -23,4 +23,9 @@ export class AuthService {
   remove(id: number) {
     return `This action removes a #${id} auth`;
   }
+  //verifie le Token
+  async IsvalidToken(token){
+    //on verifie le token
+    
+  }
 }

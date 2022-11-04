@@ -4,14 +4,11 @@
 <div class="container-fluid">
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between">
-            <h5 class="mb-0">Patients List</h5>
+            <h5 class="mb-0">Liste des Users</h5>
 
-            <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
-                <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Patients</li>
-                </ul>
-            </nav>
+            <div class="mt-4 mt-sm-0">
+                <a href="/users/add/newusers" class="btn btn-primary" >Add user</a>
+            </div>
         </div>
         
         <div class="row">
@@ -21,37 +18,33 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-                                <th class="border-bottom p-3">Age</th>
-                                <th class="border-bottom p-3">Gender</th>
-                                <th class="border-bottom p-3">Address</th>
+                    
                                 <th class="border-bottom p-3">Mobile No.</th>
                                 <th class="border-bottom p-3">Email</th>
-                                <th class="border-bottom p-3">Status</th>
                                 <th class="border-bottom p-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="py-3">
-                                    <a href="#" class="text-dark">
-                                        <div class="d-flex align-items-center">
-                                            <img src="../assets/images/client/01.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                            <span class="ms-2">Howard Tanner</span>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="p-3">25</td>
-                                <td class="p-3">Male</td>
-                                <td class="p-3">1451 - ABC Street, NY</td>
-                                <td class="p-3">(+452) 8945 4568</td>
-                                <td class="p-3">Cardiology@gmail.xoom</td>
-                                <td class="p-3"><span class="badge bg-soft-success">Approved</span></td>
-                                <td class="text-end p-3">
-                                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewprofile"><i class="uil uil-eye"></i></a>
-                                    <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#editprofile"><i class="uil uil-pen"></i></a>
-                                    <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
-                                </td>
-                            </tr>
+                            <% for (user of users){ %> 
+                                <tr>
+                                    <td class="py-3">
+                                        <a href="#" class="text-dark">
+                                            <div class="d-flex align-items-center">
+                                                <img src="/assets/images/<%= user.avatar  %>" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                <span class="ms-2"><%= user.prenom %> <%= user.nom %> </span>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td class="p-3"><%= user.numero  %> </td>
+                                    <td class="p-3"><%= user.email  %></td>
+                                    <td class="text-end p-3">
+                                        <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewprofile<%= user.id %>"><i class="uil uil-eye"></i></a>
+                                        <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#editprofile<%= user.id %>"><i class="uil uil-pen"></i></a>
+                                        <a href="/users/delete/<%= user.id %>" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -76,6 +69,103 @@
         </div><!--end row-->
     </div>
 </div><!--end container-->
+ <!-- Modal start -->
+    <% for (user of users){ %>
+        <div class="modal fade" id="editprofile<%= user.id %>" tabindex="-1" role="dialog" aria-labelledby="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">Profile Settings</h5>
+                        <button type="button" class="btn btn-icon btn-close" data-bs-dismiss="modal" id="close-modal"><i class="uil uil-times fs-4 text-dark"></i></button>
+                    </div>
+                    <div class="modal-body p-3 pt-4">
+                        <div class="row align-items-center">
+                            <!-- <div class="col-lg-5 col-md-8 text-center text-md-start mt-4 mt-sm-0">
+                                <h6 class="">Upload your picture</h6>
+                                <p class="text-muted mb-0">For best results, use an image at least 256px by 256px in either .jpg or .png format</p>
+                            </div>end col -->
 
+                            <div class="col-lg-5 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
+                                <a href="#" class="btn btn-primary">Upload</a>
+                                <a href="#" class="btn btn-soft-primary ms-2">Remove</a>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    
+                        <form action="users/update/<%= user.id %>" method="post" class="mt-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">prenom</label>
+                                        <input name="prenom" id="name" type="text" value="<%= user.prenom %>" class="form-control" placeholder="prenom :">
+                                    </div>
+                                </div><!--end col-->
 
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">nom</label>
+                                        <input name="nom" id="name2" type="text" value="<%= user.nom %>"class="form-control" placeholder="nom :">
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input name="email" id="email" type="email"value="<%= user.email %>" class="form-control" placeholder="Your email :">
+                                    </div> 
+                                </div><!--end col-->
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Telephone</label>
+                                        <input name="numero" id="number" type="text" value="<%= user.numero %>" class="form-control" placeholder="Telephone:">
+                                    </div>                                                                               
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="submit" id="submit" name="send" class="btn btn-primary" value="Save changes">
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </form><!--end form-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Profile Settings End -->
+
+        <!-- Profile Start -->
+        <div class="modal fade" id="viewprofile<%= user.id %>" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom p-3">
+                        <h5 class="modal-title" id="exampleModalLabel1">Profile</h5>
+                        <button type="button" class="btn btn-icon btn-close" data-bs-dismiss="modal" id="close-modal"><i class="uil uil-times fs-4 text-dark"></i></button>
+                    </div>
+                    <div class="modal-body p-3 pt-4">
+                        <div class="d-flex align-items-center">
+                            <img src="../assets/images/<%= user.avatar  %>" class="avatar avatar-small rounded-pill" alt="">
+                            <h5 class="mb-0 ms-3"><%= user.prenom %> <%= user.nom %></h5>
+                        </div>
+                        <ul class="list-unstyled mb-0 d-md-flex justify-content-between mt-4">
+                            <li>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-flex">
+                                        <h6>Email:</h6>
+                                        <p class="text-muted ms-2"><%= user.email %></p>
+                                    </li>
+                                    <li class="d-flex">
+                                        <h6>Telephone:</h6>
+                                        <p class="text-muted ms-2"><%= user.numero %></p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Profile End -->
+        <!-- Modal end -->
+    <% } %> 
 <%- include('./layouts/footer'); -%>

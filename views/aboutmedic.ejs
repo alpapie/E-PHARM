@@ -1,0 +1,101 @@
+<%- include('./layouts/header'); -%>
+
+
+<div class="container-fluid">
+    <div class="layout-specing">
+        <div class="d-md-flex justify-content-between">
+            <h5 class="mb-0">Liste des medicaments</h5>
+
+            <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="/medic">medic</a></li>
+                
+            </nav>
+        </div>
+        
+        <div class="card border-0 rounded shadow p-4 mt-4">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-5">
+                    <div class="client-review-slider">
+                        <div class="tiny-slide"><img src="/assets/images/<%= medic.image %>" class="img-fluid rounded" alt=""></div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-8 col-md-7 mt-4 mt-sm-0">
+                    <div class="ms-md-4">
+                        <h4 class="title"><%= medic.name %></h4>
+                        <h5 class="text-muted"><%= medic.prix %> f cfa</h5>
+
+                        <h5 class="mt-4 py-2">Description :</h5>
+                        <p class="text-muted"><%= medic.description %></p>
+    
+                        <div class="mt-4 pt-2">
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-product"><i class="uil uil-pen"></i>Edit</a>
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div>
+    </div>
+</div><!--end container-->
+
+<div class="modal fade" id="add-product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom p-3">
+                <h5 class="modal-title" id="exampleModalLabel">Add Shop Product</h5>
+                <button type="button" class="btn btn-icon btn-close" data-bs-dismiss="modal" id="close-modal"><i class="uil uil-times fs-4 text-dark"></i></button>
+            </div>
+
+            <div class="modal-body p-3 pt-4">
+                <form action="/medic/update/<%= medic.id %>" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-grid me-md-4">
+                                <p class="text-muted">Téléchargez l'image de votre boutique ici, veuillez cliquer sur le bouton "Télécharger l'image"..</p>
+                                <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"></div>
+                                <input type="file" id="input-file" name="file" />
+                            </div>
+                        </div><!--end col-->
+
+                        <div class="col-md-6 mt-4 mt-sm-0">
+                        
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Nom du medicaments<span class="text-danger">*</span></label>
+                                        <input name="name" id="name" type="text" class="form-control" placeholder="Title :"  value="<%= medic.name %>">
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label"> prix: </label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text border bg-transparent" id="basic-addon1">f cfa</span>
+                                            <input type="number" min="0" name="prix" class="form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1" value="<%= medic.prix %>">
+                                        </div>
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label"> Description : </label>
+                                        <textarea name="description" id="comments" rows="3" class="form-control" placeholder="description:"><%= medic.description %></textarea>
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-lg-12 text-end">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </div><!--end col-->
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row--> 
+               </form> 
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End modal -->
+
+<%- include('./layouts/footer'); -%>

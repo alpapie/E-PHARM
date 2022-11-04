@@ -1,31 +1,35 @@
 
 <!doctype html>
 <html lang="en" dir="ltr">
-
-    <head>
-        <meta charset="utf-8" />
-        <title>Doctris - Doctor Appointment Booking System</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
-        <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
-        <meta name="author" content="Shreethemes" />
-        <meta name="email" content="support@shreethemes.in" />
-        <meta name="website" content="https://shreethemes.in" />
-        <meta name="Version" content="v1.4.0" />
-        <!-- favicon -->
-        <link rel="shortcut icon" href="../assets/images/favicon.ico">
-        
-        <!-- Css -->
-        <!-- Bootstrap Css -->
-        <link href="../assets/css/bootstrap.min.css" class="theme-opt" rel="stylesheet" type="text/css" />
-        <!-- Icons Css -->
-        <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/libs/remixicon/fonts/remixicon.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
-        <!-- Style Css-->
-        <link href="../assets/css/style.min.css" class="theme-opt" rel="stylesheet" type="text/css" />
-
-    </head>
+    <!doctype html>
+    <html lang="fr" dir="ltr">
+    
+        <head>
+            <meta charset="utf-8" />
+            <title>E-PHARM</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="application de gestion p[our pharmacie" />
+            <meta name="keywords" content="" />
+            <meta name="author" content="" />
+            <meta name="email" content="alpapie0908@gmail.com" />
+            <meta name="website" content="https://shreethemes.in" />
+            <meta name="Version" content="v1.4.0" />
+            <!-- favicon -->
+            <link rel="shortcut icon" href="../assets/images/favicon.ico">
+            
+            <!-- Css -->
+            <link href="../assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+            <!-- Bootstrap Css -->
+            <link href="../assets/css/bootstrap.min.css" class="theme-opt" rel="stylesheet" type="text/css" />
+            <!-- Icons Css -->
+            <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+            <link href="../assets/libs/remixicon/fonts/remixicon.css" rel="stylesheet" type="text/css" />
+            <link href="../assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
+            <!-- Style Css-->
+            <link href="../assets/css/style.min.css" class="theme-opt" rel="stylesheet" type="text/css" />
+    
+        </head>
+    
 
     <body>
         <!-- Loader -->
@@ -39,20 +43,23 @@
         </div> -->
         <!-- Loader -->
         
-        <div class="back-to-home rounded d-none d-sm-block">
+        <!-- <div class="back-to-home rounded d-none d-sm-block">
             <a href="index.html" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
-        </div>
+        </div> -->
 
         <!-- Hero Start -->
         <section class="bg-home d-flex bg-light align-items-center" style="background: url('../assets/images/bg/bg-lines-one.png') center;">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-8">
-                        <img src="../assets/images/logo-dark.png" height="22" class="mx-auto d-block" alt="">
+                        <img src="../assets/images/logo-dark.png" height="42" class="mx-auto d-block" alt="">
                         <div class="card login-page shadow mt-4 rounded border-0">
                             <div class="card-body">
                                 <h4 class="text-center">Sign In</h4>  
-                                <form action="index.html" class="login-form mt-4">
+                                <% if( typeof(error) !=="undefined") { %>
+                                 <div class="alert alert-danger"><%= error %></div>
+                                <% } %>
+                                <form action="/users/login" method="post" class="login-form mt-4">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
@@ -64,7 +71,7 @@
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" placeholder="Password" required="">
+                                                <input type="password" name="password" class="form-control" placeholder="Password" required="">
                                             </div>
                                         </div>
 

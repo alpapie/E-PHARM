@@ -14,7 +14,7 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname,'..','views'));
   app.setViewEngine('ejs'); 
   await app.listen(process.env.port,()=>{
-    console.log(`le server est demarer sur http://127.0.0.1:${process.env.port}`)
+    console.log(`le server est démarrée sur http://127.0.0.1:${process.env.port}`)
   });
 }
 bootstrap();
